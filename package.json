@@ -1,29 +1,30 @@
 {
-    "name": "topical-twitter-repo",
-    "version": "1.0.0",
-    "description": "it's twitter but uh stay on topic pls",
-    "main": "server.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/cameronrasmo/topical-twitter-repo.git"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/cameronrasmo/topical-twitter-repo/issues"
-    },
-    "homepage": "https://github.com/cameronrasmo/topical-twitter-repo#readme",
-    "dependencies": {
-        "dotenv": "^8.2.0",
-        "express": "^4.17.1",
-        "express-jwt": "^5.3.3",
-        "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.9.14",
-        "morgan": "^1.10.0",
-        "nodemon": "^2.0.4"
-    }
+  "name": "topical-twitter-repo",
+  "version": "1.0.0",
+  "description": "it's twitter but uh stay on topic pls",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cameronrasmo/topical-twitter-repo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cameronrasmo/topical-twitter-repo/issues"
+  },
+  "homepage": "https://github.com/cameronrasmo/topical-twitter-repo#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.14",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4"
+  }
 }

@@ -6,12 +6,12 @@ import axios from 'axios'
     const [signIn, setSignIn] = useState([])
   
     function getSignIn(){
-      axios.get('/signUp')
+      axios.get('/post')
       .then(res => setSignIn(res.data))
       .catch(error => console.log(error.response.data.errMsg))
     }
     function addSignIn(newSign){
-      axios.post('/signUp', newSign)
+      axios.post('/post', newSign)
       .then(res => {
         setSignIn(prevSign=> [...prevSign, res.data])
       })
@@ -19,17 +19,17 @@ import axios from 'axios'
     }
   
     function deleteSignIn(signId ){
-      axios.delete(`/signUp/${signId}`)
+      axios.delete(`/post/${signId}`)
       .then(res => {
         setSignIn(prevSign => prevSign.filter(sign=>sign._id!==signId))
       })
       .catch(error => console.log(error)) 
     }
   
-    function editSignIn(update, bountyId){
-      axios.put(`/signUp/${bountyId}`, update)
+    function editSignIn(update, signId){
+      axios.put(`/post/${signId}`, update)
       .then(res => {
-        setSignIn(prevBounty=> prevBounty.map(signIn=>signIn._id !== bountyId ? signIn : res.data))
+        setSignIn(prevBounty=> prevBounty.map(signIn=>signIn._id !== signId ? signIn : res.data))
       })
       .catch(error => console.log(error)) 
     }

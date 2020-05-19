@@ -25,7 +25,7 @@ export default function Home(props) {
     <form onSubmit={handleSubmit} className="container">
       <div className="container2">
       <input name='firstName' value={inputs.firstName} onChange={handleChange} placeholder="Name" />
-      <input name='bio' value={inputs.bio} onChange={handleChange} placeholder="breif description of yourself"/>
+      <input name='bio' value={inputs.bio} onChange={handleChange} placeholder="about you"/>
       <input name='picture' value={inputs.picture} onChange={handleChange} placeholder="picture url" />
       <button>join</button>
       </div>

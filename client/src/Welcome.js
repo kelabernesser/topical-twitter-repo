@@ -131,8 +131,8 @@ const JoinPanelContainer = styled.div`
         }
 
         & h3 {
-            font-size: 50px;
-            padding-bottom: 5px;
+            font-size: 30px;
+            padding-bottom: 15px;
             line-height: 1;
         }
 
@@ -227,16 +227,49 @@ const WelcomeContainer = styled.div`
 
 function Welcome() {
     const panelRef = React.createRef();
+    const colors = ["#8ae7e1", "#f0bfa2", "#f8aeae", "#aeccf8"];
+    const initInputState = {
+        username: "",
+        bio: "",
+        imgUrl: "",
+    };
+    const [inputState, setInputState] = React.useState(initInputState);
+
+    function handleChange(e) {
+        let { name, value } = e.target;
+        if (name === "username") {
+            const noSpace = value
+                .split("")
+                .filter((char) => char !== " ")
+                .join("");
+            setInputState((prev) => {
+                return {
+                    ...prev,
+                    username: `${noSpace}`,
+                };
+            });
+        } else {
+            setInputState((prev) => {
+                return {
+                    ...prev,
+                    [name]: value,
+                };
+            });
+        }
+    }
 
     React.useEffect(() => {
         const { style } = panelRef.current;
         setTimeout(() => {
+            document.body.style.backgroundColor =
+                colors[Math.floor(Math.random() * 4)];
             style.top = "0px";
             console.log(style.top);
             style.opacity = "1";
             console.log(style.opacity);
         }, 250);
-    });
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <WelcomeContainer>
@@ -256,11 +289,34 @@ function Welcome() {
                     <h3>join the discussion.</h3>
                     <form>
                         <label>username</label>
-                        <input placeholder='your handle' />
+                        <input
+                            placeholder='your handle'
+                            value={inputState.username}
+                            onChange={handleChange}
+                            name='username'
+                            onFocus={() => {
+                                setInputState((prev) => {
+                                    return {
+                                        ...prev,
+                                        username: "@",
+                                    };
+                                });
+                            }}
+                        />
                         <label>bio</label>
-                        <input placeholder='your brief story' />
+                        <input
+                            placeholder='your brief story'
+                            value={inputState.bio}
+                            onChange={handleChange}
+                            name='bio'
+                        />
                         <label>profile picture</label>
-                        <input placeholder='your image url' />
+                        <input
+                            placeholder='your image url'
+                            value={inputState.imgUrl}
+                            onChange={handleChange}
+                            name='imgUrl'
+                        />
 
                         <button>join</button>
                     </form>

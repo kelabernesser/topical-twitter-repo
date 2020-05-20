@@ -4,20 +4,21 @@ import axios from 'axios'
   
   function ThemeContextProvider(props){
     const [signIn, setSignIn] = useState([])
-  
+
     function getSignIn(){
       axios.get('/user')
-
       .then(res => setSignIn(res.data))
       .catch(error => console.log(error.response.data.errMsg))
     }
+
     function userSignIn(newSign){
-      axios.post('/user', newSign)
+      axios.post('/post', newSign)
       .then(res => {
-        setSignIn(prevSign=> [...prevSign, res.data])
+        setSignIn(prevSign => [...prevSign, res.data])
       })
       .catch(error => console.log(error)) 
     }
+
     function addPost(newSign){
       axios.post('/post', newSign)
       .then(res => {
@@ -27,7 +28,6 @@ import axios from 'axios'
     }
   
     function deleteSignIn(signId ){
-
       axios.delete(`/user/${signId}`)
       .then(res => {
         setSignIn(prevSign => prevSign.filter(sign=>sign._id!==signId))
@@ -35,10 +35,10 @@ import axios from 'axios'
       .catch(error => console.log(error)) 
     }
   
-    function editSignIn(update, bountyId){
-      axios.put(`/user/${bountyId}`, update)
+    function editSignIn(update, signId){
+      axios.put(`/user/${signId}`, update)
       .then(res => {
-        setSignIn(prevBounty=> prevBounty.map(signIn=>signIn._id !== bountyId ? signIn : res.data))
+        setSignIn(prevBounty=> prevBounty.map(signIn=>signIn._id !== signId ? signIn : res.data))
       })
       .catch(error => console.log(error)) 
     }

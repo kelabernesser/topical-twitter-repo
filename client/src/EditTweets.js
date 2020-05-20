@@ -3,11 +3,11 @@ import Tweets from "./Tweets"
 import {ThemeContext} from "./ThemeContext"
 
 export default function EditTweets(props) {
-  const {tweet}=props
+  const {tweet, _id}=props
   
   const [editToggle, setEditToggle]=useState(false)
 
-  const { editSignIn, deleteSignIn, addSignIn } = useContext(ThemeContext)
+  const { editSignIn, deleteSignIn,} = useContext(ThemeContext)
 
   
   return (
@@ -15,13 +15,13 @@ export default function EditTweets(props) {
       { !editToggle ?
       <>
            <h3>{tweet}</h3>
-        <button onClick={() => deleteSignIn()}>delete</button>
+        <button onClick={() => deleteSignIn(_id)}>delete</button>
         <button onClick={()=> setEditToggle(prevToggle => !prevToggle)}>edit</button>
       </>
         :
         <>
           <Tweets
-          tweet={tweet}
+          tweet={tweet} key={_id}
           />
           <button  onClick={()=> setEditToggle(prevToggle => !prevToggle)}>close</button>
        </>

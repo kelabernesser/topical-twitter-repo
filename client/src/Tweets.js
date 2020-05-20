@@ -24,7 +24,7 @@ export default function Form(props) {
   }
   
   const mappedInput=inputs.map(function(newIn){
-    return <EditTweets tweet={newIn.tweet}/>
+    return <EditTweets tweet={newIn.tweet} key={props._id}/>
   })
 
   return (

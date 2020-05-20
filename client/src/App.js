@@ -1,6 +1,6 @@
 import React from "react";
 // import Home from "./Home";
-// import Welcome from "./Welcome.js";
+import Welcome from "./Welcome.js";
 import Tweets from "./Tweets";
 import Profile from "./Profile";
 import styled from "styled-components";
@@ -17,7 +17,7 @@ function App() {
         <div>
             <Switch>
                 <Route exact path='/'>
-                    <Tweets />
+                    <Welcome />
                 </Route>
                 <Route path='/Tweets'>
                     <Navbar>

@@ -6,20 +6,29 @@ import axios from 'axios'
     const [signIn, setSignIn] = useState([])
   
     function getSignIn(){
-      axios.get('/signUp')
+      axios.get('/user')
+
       .then(res => setSignIn(res.data))
       .catch(error => console.log(error.response.data.errMsg))
     }
-    function addSignIn(newSign){
-      axios.post('/signUp', newSign)
+    function userSignIn(newSign){
+      axios.post('/user', newSign)
       .then(res => {
         setSignIn(prevSign=> [...prevSign, res.data])
       })
       .catch(error => console.log(error)) 
     }
+    function addPost(newSign){
+      axios.post('/post', newSign)
+      .then(res => {
+       return res.data
+      })
+      .catch(error => console.log(error)) 
+    }
   
     function deleteSignIn(signId ){
-      axios.delete(`/signUp/${signId}`)
+
+      axios.delete(`/user/${signId}`)
       .then(res => {
         setSignIn(prevSign => prevSign.filter(sign=>sign._id!==signId))
       })
@@ -27,7 +36,7 @@ import axios from 'axios'
     }
   
     function editSignIn(update, bountyId){
-      axios.put(`/signUp/${bountyId}`, update)
+      axios.put(`/user/${bountyId}`, update)
       .then(res => {
         setSignIn(prevBounty=> prevBounty.map(signIn=>signIn._id !== bountyId ? signIn : res.data))
       })
@@ -42,9 +51,9 @@ import axios from 'axios'
   
     
     return (
-      <ThemeContext.Provider value={{signIn, editSignIn, deleteSignIn, addSignIn,}}>
+      <ThemeContext.Provider value={{signIn, editSignIn, deleteSignIn, addPost, userSignIn}}>
               { props.children }
-          </ThemeContext.Provider>
+      </ThemeContext.Provider>
   )
   }
   

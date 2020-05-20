@@ -1,40 +1,49 @@
-const express = require('express')
-const postRouter = express.Router()
-const Post = require('../models/post.js')
+const express = require("express");
+const postRouter = express.Router();
+const Post = require("../models/post.js");
 
-postRouter.get('/', (req, res, next) => {
+postRouter.get("/", (req, res, next) => {
     Post.find((err, posts) => {
-        if(err){
-            res.status(500)
-            return next(err)
+        if (err) {
+            res.status(500);
+            return next(err);
         }
-        return res.status(200).send(posts)
-    })
-})
+        return res.status(200).send(posts);
+    });
+});
 
-postRouter.post('/', (req, res, next) => {
-    const newPost = new Post(req.body)
+postRouter.get("/topic/:topicID", (req, res, next) => {
+    Post.find({ topic: req.params.topicID }, (err, posts) => {
+        if (err) {
+            res.status(500);
+            return next(err);
+        }
+        res.status(200).send(posts);
+    });
+});
+
+postRouter.post("/", (req, res, next) => {
+    const newPost = new Post(req.body);
+    newPost.user = req.user._id;
     newPost.save((err, savedPost) => {
-        if(err){
-            res.status(500)
-            return next(err)
+        if (err) {
+            res.status(500);
+            return next(err);
         }
-        return res.status(200).send(savedPost)
-    })
-})
+        return res.status(200).send(savedPost);
+    });
+});
 
-postRouter.delete('/:postId', (req, res, next) => {
-    Post.findOneAndDelete(
-        {_id: req.params.postId},
-        (err, deletedPost) => {
-            if(err){
-            res.status(500)
-            return next(err)
-            }
-            return res.status(200).send(`Successfully deleted post: ${deletedPost}`)
+postRouter.delete("/:postId", (req, res, next) => {
+    Post.findOneAndDelete({ _id: req.params.postId }, (err, deletedPost) => {
+        if (err) {
+            res.status(500);
+            return next(err);
         }
-        
-    )
-})
+        return res
+            .status(200)
+            .send(`Successfully deleted post: ${deletedPost}`);
+    });
+});
 
-module.exports = postRouter
+module.exports = postRouter;

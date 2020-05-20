@@ -4,11 +4,13 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
     username: {
         type: String,
-        required: true
+        required: true,
+        lowercase: true,
+        unique: true
     },
-    postCount: {
-        type: Number,
-        default: 0
+    password: {
+        type: String,
+        required: true
     },
     memberSince:{
         type: Date,

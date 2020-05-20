@@ -1,52 +1,52 @@
 const express = require('express')
 const userRouter = express.Router()
 const User = require("../models/user.js")
+const jwt = require('jsonwebtoken')
 
-userRouter.get('/', (req, res, next) => {
-    User.find((err, users) => {
-        if (err) {
+//signup
+userRouter.post('/signup', (req, res, next) => {
+    User.findOne({username: req.body.username.toLowerCase()}, (err, user) => {
+        if(err){
             res.status(500)
             return next(err)
         }
-        return res.status(200).send(users)
+        if(user){
+            res.status(403)
+            return next(new Error("username is already taken"))
+        }
+        const newUser = new User(req.body)
+        newUser.save((err, savedUser) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            const token = jwt.sign(savedUser.toObject(), process.env.SECRET)
+            return res.status(201).send({token, user: savedUser})
+        })
     })
 })
 
-userRouter.post('/', (req, res, next) => {
+//login
+userRouter.post('/login', (req, res, next) => {
     User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
         if (err) {
             res.status(500)
             return next(err)
         }
-        if (user) {
-            return res.status(200).send(user)
-        } else {
-            const newUser = new User(req.body)
-            newUser.save((err, savedUser) => {
-                if (err) {
-                    res.status(500)
-                    return next(err)
-                }
-                return res.status(200).send({ user: savedUser })
-            })
-
+        if (!user) {
+            res.status(403)
+            return next(new Error("Username or password are incorrect"))
+        } 
+        if(req.body.password !== user.password){
+            req.status(403)
+            return next(new Error("Username or password are incorrect"))
         }
-
+        const token = jwt.sign(user.toObject(), process.env.SECRET)
+        return res.status(200).send({token, user})
 
     })
 
 })
 
-userRouter.delete('/:userId', (req, res, next) => {
-    User.findOneAndDelete(
-        {_id: req.params.userId},
-        (err, deletedUser) => {
-            if(err){
-                res.status(500)
-                return next(err)
-            }
-            return res.status(200).send("Successfully deleted User")
-        }
-    )
-})
+
 module.exports = userRouter

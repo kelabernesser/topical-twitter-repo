@@ -3,6 +3,22 @@ import styled from "styled-components";
 import welcomeIcon from "./img/android-chrome-512x512.png";
 import downIcon from "./img/downarrow.png";
 
+const SwitchAuthButton = styled.div`
+    width: 40%;
+    margin-left: 10px;
+    color: #2e2e2e75;
+
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+        color: #2e2e2e;
+    }
+
+    &:active {
+        text-decoration: none;
+    }
+`;
 const JoinPanelContainer = styled.div`
     height: 100%;
 
@@ -228,12 +244,17 @@ const WelcomeContainer = styled.div`
 function Welcome() {
     const panelRef = React.createRef();
     const colors = ["#8ae7e1", "#f0bfa2", "#f8aeae", "#aeccf8"];
-    const initInputState = {
+    const initSignupState = {
         username: "",
         password: "",
         imgUrl: "",
     };
-    const [inputState, setInputState] = React.useState(initInputState);
+    const initLoginState = {
+        username: "",
+        password: "",
+    };
+    const [authType, setAuthType] = React.useState("signup");
+    const [inputState, setInputState] = React.useState(initSignupState);
 
     function handleChange(e) {
         let { name, value } = e.target;
@@ -286,7 +307,11 @@ function Welcome() {
             </WelcomeMessageContainer>
             <JoinPanelContainer>
                 <div ref={panelRef}>
-                    <h3>join the discussion.</h3>
+                    <h3>
+                        {authType === "signup"
+                            ? "join the discussion."
+                            : "welcome back."}
+                    </h3>
                     <form>
                         <label>username</label>
                         <input
@@ -310,15 +335,32 @@ function Welcome() {
                             onChange={handleChange}
                             name='bio'
                         />
-                        <label>profile picture</label>
-                        <input
-                            placeholder='your image url'
-                            value={inputState.imgUrl}
-                            onChange={handleChange}
-                            name='imgUrl'
-                        />
-
-                        <button>join</button>
+                        {authType === "signup" ? (
+                            <div>
+                                <label>profile picture</label>
+                                <input
+                                    placeholder='your image url'
+                                    value={inputState.imgUrl}
+                                    onChange={handleChange}
+                                    name='imgUrl'
+                                />
+                            </div>
+                        ) : null}
+                        <SwitchAuthButton
+                            onClick={() => {
+                                setAuthType((prev) =>
+                                    prev === "signup" ? "login" : "signup"
+                                );
+                                console.log(authType);
+                            }}
+                        >
+                            {authType === "signup"
+                                ? "already a member?"
+                                : "need to signup?"}
+                        </SwitchAuthButton>
+                        <button>
+                            {authType === "signup" ? "join" : "login"}
+                        </button>
                     </form>
                 </div>
             </JoinPanelContainer>

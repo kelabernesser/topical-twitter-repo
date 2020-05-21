@@ -8,8 +8,8 @@ import axios from 'axios'
     const [signIn, setSignIn] = useState([])
 
     function getSignIn(){
-      axios.get('/post')
-      .then(res => setSignIn(res.data))
+      axios.get('/api/post')
+      .then(res => console.log(res.data))
       .catch(error => console.log(error.response.data.errMsg))
     }
 

@@ -3,7 +3,7 @@ import Tweets from "./Tweets"
 import {ThemeContext} from "./ThemeContext"
 
 export default function EditTweets(props) {
-  const {tweet, _id}=props
+  const {tweets, _id}=props
   
   const [editToggle, setEditToggle]=useState(false)
 
@@ -14,14 +14,16 @@ export default function EditTweets(props) {
     <div>
       { !editToggle ?
       <>
-           <h3>{tweet}</h3>
+           <h3>{tweets}</h3>
         <button onClick={() => deleteSignIn(_id)}>delete</button>
         <button onClick={()=> setEditToggle(prevToggle => !prevToggle)}>edit</button>
       </>
         :
         <>
           <Tweets
-          tweet={tweet} key={_id}
+          tweets={tweets}
+           key={_id}
+           submit={editSignIn}
           />
           <button  onClick={()=> setEditToggle(prevToggle => !prevToggle)}>close</button>
        </>

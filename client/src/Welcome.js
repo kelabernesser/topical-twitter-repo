@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import welcomeIcon from "./img/android-chrome-512x512.png";
 import downIcon from "./img/downarrow.png";
+import { Link } from "react-router-dom";
 
 const JoinPanelContainer = styled.div`
     height: 100%;
@@ -317,8 +318,9 @@ function Welcome() {
                             onChange={handleChange}
                             name='imgUrl'
                         />
-
+                        <Link to="Tweets">
                         <button>join</button>
+                        </Link>
                     </form>
                 </div>
             </JoinPanelContainer>
@@ -327,3 +329,4 @@ function Welcome() {
 }
 
 export default Welcome;
+ 

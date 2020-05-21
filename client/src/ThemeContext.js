@@ -1,12 +1,14 @@
 import React, {createContext, useState, useEffect} from "react"
+import Tweets from "./Tweets"
+import EditTweets from "./EditTweets"
 import axios from 'axios'
   const ThemeContext = createContext()
-  
+
   function ThemeContextProvider(props){
     const [signIn, setSignIn] = useState([])
 
     function getSignIn(){
-      axios.get('/user')
+      axios.get('/post')
       .then(res => setSignIn(res.data))
       .catch(error => console.log(error.response.data.errMsg))
     }
@@ -51,9 +53,12 @@ import axios from 'axios'
   
     
     return (
-      <ThemeContext.Provider value={{signIn, editSignIn, deleteSignIn, addPost, userSignIn}}>
-              { props.children }
-      </ThemeContext.Provider>
+      <div>
+        <ThemeContext.Provider value={{signIn, editSignIn, deleteSignIn, addPost, userSignIn}}>
+                { props.children }
+        </ThemeContext.Provider>
+
+      </div>
   )
   }
   

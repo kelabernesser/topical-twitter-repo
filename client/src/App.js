@@ -1,5 +1,4 @@
 import React from "react";
-// import Home from "./Home";
 import Welcome from "./Welcome.js";
 import Tweets from "./Tweets";
 import Profile from "./Profile";
@@ -17,11 +16,11 @@ function App() {
         <div>
             <Switch>
                 <Route exact path='/'>
-                    <Welcome />
+                    <Welcome/>
                 </Route>
                 <Route path='/Tweets'>
                     <Navbar>
-                        <Link to='/'>Home</Link>
+                        <Link to='/'>sign in</Link>
                         <Link to='/Tweets'>tweets</Link>
                         <Link to='/Profile'>Profile</Link>
                     </Navbar>
@@ -29,7 +28,7 @@ function App() {
                 </Route>
                 <Route path='/Profile'>
                     <Navbar>
-                        <Link to='/'>Home</Link>
+                        <Link to='/'>sign in</Link>
                         <Link to='/Tweets'>tweets</Link>
                         <Link to='/Profile'>Profile</Link>
                     </Navbar>

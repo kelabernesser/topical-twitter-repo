@@ -31,7 +31,7 @@ postRouter.delete('/:postId', (req, res, next) => {
             res.status(500)
             return next(err)
             }
-            return res.status(200).send(`Successfully deleted post: ${deletedPost.textBody}`)
+            return res.status(200).send(`Successfully deleted post: ${deletedPost}`)
         }
         
     )

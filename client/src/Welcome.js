@@ -230,7 +230,7 @@ function Welcome() {
     const colors = ["#8ae7e1", "#f0bfa2", "#f8aeae", "#aeccf8"];
     const initInputState = {
         username: "",
-        bio: "",
+        password: "",
         imgUrl: "",
     };
     const [inputState, setInputState] = React.useState(initInputState);
@@ -303,10 +303,10 @@ function Welcome() {
                                 });
                             }}
                         />
-                        <label>bio</label>
+                        <label>password</label>
                         <input
-                            placeholder='your brief story'
-                            value={inputState.bio}
+                            placeholder='your password'
+                            value={inputState.password}
                             onChange={handleChange}
                             name='bio'
                         />

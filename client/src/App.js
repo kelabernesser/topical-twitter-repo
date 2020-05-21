@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Welcome from "./Welcome.js";
 import Tweets from "./Tweets";
 import Profile from "./Profile";
 import styled from "styled-components";
 import { Switch, Route, Link } from "react-router-dom";
+import { UserContext } from './context/UserProvider'
+
 
 const Navbar = styled.nav`
     width: 100%;
@@ -12,12 +14,14 @@ const Navbar = styled.nav`
 `;
 
 function App() {
+    // const { token, logout } = useContext(UserContext)
     return (
         <div>
             <Switch>
                 <Route exact path='/'>
                     <Welcome/>
                 </Route>
+              
                 <Route path='/Tweets'>
                     <Navbar>
                         <Link to='/'>sign in</Link>

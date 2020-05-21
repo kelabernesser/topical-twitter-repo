@@ -99,6 +99,8 @@ const JoinPanelContainer = styled.div`
         font-size: 20px;
 
         border: 1px solid black;
+        box-shadow: 0px 15px 20px 0px #2e2e2e25;
+
         border-radius: 25px;
         outline: none;
 
@@ -114,11 +116,13 @@ const JoinPanelContainer = styled.div`
     & button:hover {
         background-color: #f2f2f2;
         color: #2e2e2e;
+        box-shadow: 0px 8px 15px 0px #2e2e2e50;
     }
 
     & button:active {
         background-color: #e8e8e8;
         color: black;
+        box-shadow: 0px 5px 15px 0px #2e2e2e75;
     }
 
     @media (max-width: 1440px) {
@@ -291,7 +295,7 @@ function Welcome() {
         }, 250);
         // eslint-disable-next-line
     }, []);
-
+    console.log(inputState);
     return (
         <WelcomeContainer>
             <WelcomeMessageContainer>
@@ -351,7 +355,11 @@ function Welcome() {
                                 setAuthType((prev) =>
                                     prev === "signup" ? "login" : "signup"
                                 );
-                                console.log(authType);
+                                setInputState((prev) =>
+                                    authType === "signup"
+                                        ? initLoginState
+                                        : initSignupState
+                                );
                             }}
                         >
                             {authType === "signup"
